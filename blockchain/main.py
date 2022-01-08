@@ -1,7 +1,14 @@
-from block import Block
+from chain import Chain
 
-block = Block("Hello world")
-block.mine(20)
-print(block.hash.hexdigest())
-print(block.nonc)
-print(block.data)
+
+chain = Chain(20)
+
+while(True):
+    data = input('Insert data to be hashed:')
+    chain.add_to_pool(data)
+    chain.mine()
+
+    for item in chain.blocks:
+        hash = item.hash
+        data = item.data
+        print(data,hash.hexdigest())
